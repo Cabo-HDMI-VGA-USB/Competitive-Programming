@@ -1,3 +1,6 @@
+# Créditos ao TiagoDFS - https://github.com/Tiagosf00/Competitive-Programming
+# Créditos ao Bruno_Vargas - https://github.com/BrunoVarg/Competitive-Programming
+
 import os, subprocess
 from dataclasses import dataclass
 from functools import reduce
@@ -143,7 +146,6 @@ def main() -> None:
     )
 
     full_latex = apply_content_to_latex_template(content_in_latex, ICON_PATH, TEMPLATE_PATH)
-    print(full_latex)
     write_to_file(full_latex, NOTEBOOK_NAME)
     compile_tex(NOTEBOOK_NAME)
 
