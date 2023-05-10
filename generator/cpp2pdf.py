@@ -71,11 +71,14 @@ def string_to_content(source: str) -> Content:
 
     return Content(title=title, complexity=complexity, description=description, code=source)
 
+def scape_string(source: str) -> str:
+    return source.replace(r"_", r"\_")
+
 def content_to_latex(content: Content) -> str:
     return f"""
-\\subsection{{{content.title}}}
-Complexity: {content.complexity} \\\\
-{content.description}
+\\subsection{{{scape_string(content.title)}}}
+Complexity: {scape_string(content.complexity)} \\\\
+{scape_string(content.description)}
 \\begin{{lstlisting}}
 {content.code}
 \\end{{lstlisting}}
@@ -113,7 +116,6 @@ def compile_tex(tex_path: str) -> None:
             print("Erro na transformação de LaTex para pdf.")
             print("Execute manualmente para entender o erro:")
             print(f"pdflatex -interaction=nonstopmode -halt-on-error {tex_path}")
-            clean_latex_aux_files(tex_path)
             exit(1)
 
     clean_latex_aux_files(tex_path)
