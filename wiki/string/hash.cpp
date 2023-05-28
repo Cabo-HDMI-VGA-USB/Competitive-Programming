@@ -2,18 +2,6 @@
 // COMPLEXITY: O(n) preprocessing, O(1) query
 // DESCRIPTION: Computes the hash of arbitrary substrings of a given string s.
 
-bool isprime(int x)
-{
-	if (x < 2)
-		return false;
-	for (int i = 2; i * i <= x; i++)
-	{
-		if (x % i == 0)
-			return false;
-	}
-	return true;
-}
-
 struct hashs
 {
 	string s;
@@ -26,10 +14,6 @@ struct hashs
 		p = 31;
 		m1 = rand() / 10 + 1e9; // 1000253887;
 		m2 = rand() / 10 + 1e9; // 1000546873;
-		while (!isprime(m1))
-			m1++;
-		while (!isprime(m2))
-			m2++;
 
 		p1[0] = p2[0] = 1;
 		loop(i, 1, n + 1)
