@@ -1,14 +1,4 @@
-#include <bits/stdc++.h>
-
-using namespace std;
-
-#define endl "\n"
-
-#define int long long
-#define all(x) (x).begin(), (x).end()
-#define debug(x) cout << #x << ": " << x << endl
-
-const int oo = 0x3f3f3f3f3f3f3f3f;
+// TITLE: Parsing Functions
 
 vector<string> split_string(const string & s, const string & sep = " ") {
     int w = sep.size();
@@ -54,6 +44,7 @@ vector<float> parse_vector_float(string & s)
 
 void solve()
 {
+    cin.ignore();
     string s;
     getline(cin, s);
 
@@ -61,12 +52,4 @@ void solve()
     for (auto x: nums) {
         cout << x << endl;
     }
-}
-int32_t main()
-{
-    ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
-    int t = 1;
-    // cin >> t;
-    while(t--) solve();
-    return 0;
 }
