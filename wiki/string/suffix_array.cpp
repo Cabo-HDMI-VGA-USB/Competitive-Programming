@@ -1,6 +1,6 @@
 // TITLE: Suffix Array
 // COMPLEXITY: O(n log(n)), contains big constant (around 25).
-// DESCRIPTION: Computes the hash of arbitrary substrings of a given string s.
+// DESCRIPTION: Computes a sorted array of the suffixes of a string.
 
 void countingsort(vi& p, vi& c) {
 	int n=p.size();
