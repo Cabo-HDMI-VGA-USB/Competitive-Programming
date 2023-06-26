@@ -1,5 +1,5 @@
 # Competitive-Programming
-The competitive programming wiki of your team
+The competitive programming wiki of our team
 
 # How to run the Script
 ```sh
