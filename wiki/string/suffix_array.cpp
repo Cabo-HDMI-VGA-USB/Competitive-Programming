@@ -1,5 +1,5 @@
 // TITLE: Suffix Array
-// COMPLEXITY: O(n log(n)
+// COMPLEXITY: O(n log(n), big constant included (around 25)
 // DESCRIPTION: Computes the hash of arbitrary substrings of a given string s.
 
 void countingsort(vi& p, vi& c) {
