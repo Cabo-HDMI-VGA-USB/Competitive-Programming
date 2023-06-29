@@ -1,20 +1,20 @@
 // TITLE: Ordered Set
-// COMPLEXITY: O(log(n))
-// DESCRIPION: Set but you can look witch elements is in position (k)
+// COMPLEXITY: log n
+// DESCRIPTION: Worst set with adtional operations
 
-#include <ext/pb_ds/assoc_container.hpp>
-#include <ext/pb_ds/tree_policy.hpp>
-using namespace __gnu_pbds;
 
-#define ordered_set tree<int, null_type,less<int>, rb_tree_tag,tree_order_statistics_node_update>
+#include <bits/extc++.h>
+using namespace __gnu_pbds; // or pb_ds;
+template<typename T, typename B = null_type>
+using ordered_set = tree<T, B, less<T>, rb_tree_tag, tree_order_statistics_node_update>;
 
 int32_t main() {
-    ordered_set o_set;
+    ordered_set<int> oset;
 
-    o_set.insert(5);
-    o_set.insert(1);
-    o_set.insert(2);
+    oset.insert(5);
+    oset.insert(1);
+    oset.insert(2);
     // o_set = {1, 2, 5}
-    5 == *(o_set.find_by_order(2));
-    2 == o_set.order_of_key(4); // {1, 2}
+    5 == *(oset.find_by_order(2)); // Like an array index
+    2 == oset.order_of_key(4); // How many elements are strictly less than 4
 }
