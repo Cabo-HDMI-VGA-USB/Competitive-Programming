@@ -1,6 +1,6 @@
 // TITLE: Bellman Ford
 // COMPLEXITY: O(n * m) | n = |nodes|, m = |edges|
-// DESCRIPTION: Finds shortest paths from a starting node to all nodes of the graph. The node can have negative cycle and belman-ford will detected
+// DESCRIPTION: Finds shortest paths from a starting node to all nodes of the graph. Detects negative cycles, if they exist.
 
 // a and b vertices, c cost
 // [{a, b, c}, {a, b, c}]
