@@ -58,7 +58,7 @@ signed main()
 	}
 	seg.assign(2 * segsize - 1, iden);
 
-	loop(i, 0, n)
+	rep(i, 0, n)
 	{
 		int x;
 		cin >> x;

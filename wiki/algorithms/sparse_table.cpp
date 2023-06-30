@@ -14,10 +14,10 @@ struct sptable {
 		int ln= ilog(n)+1;
 		table.assign(ln, vi(n));
  
-		loop(i,0,n) table[0][i]=vals[i];
+		rep(i,0,n) table[0][i]=vals[i];
  
-		loop(k, 1, ln) {
-			loop(i,0,n) {
+		rep(k, 1, ln) {
+			rep(i,0,n) {
 				table[k][i] = min(table[k-1][i],
 				table[k-1][min(i + (1<<(k-1)), n-1)]);
 			}

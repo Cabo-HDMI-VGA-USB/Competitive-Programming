@@ -62,7 +62,7 @@ struct twosat {
 	// returns empty vector if the formula is not satisfiable.
 	vi run() {
 		vi vals(gsize/2, -1);
-		loop(i,0,gsize) dfs1(i);
+		rep(i,0,gsize) dfs1(i);
 		vis.assign(gsize,0);
 		while(!tout.empty()) {
 			int cur = tout.top();tout.pop();
@@ -71,7 +71,7 @@ struct twosat {
 			conv.pb(cur);
 		}
 
-		loop(i, 0, gsize/2) {
+		rep(i, 0, gsize/2) {
 			if (repr[2*i] == repr[2*i+1]) {
 				return {};
 			}

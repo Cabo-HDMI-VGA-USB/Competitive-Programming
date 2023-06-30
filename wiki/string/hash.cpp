@@ -16,14 +16,14 @@ struct hashs
 		m2 = rand() / 10 + 1e9; // 1000546873;
 
 		p1[0] = p2[0] = 1;
-		loop(i, 1, n + 1)
+		rep(i, 1, n + 1)
 		{
 			p1[i] = (p * p1[i - 1]) % m1;
 			p2[i] = (p * p2[i - 1]) % m2;
 		}
 
 		sum1[0] = sum2[0] = 0;
-		loop(i, 1, n + 1)
+		rep(i, 1, n + 1)
 		{
 			sum1[i] = (sum1[i - 1] * p) % m1 + s[i - 1];
 			sum2[i] = (sum2[i - 1] * p) % m2 + s[i - 1];
