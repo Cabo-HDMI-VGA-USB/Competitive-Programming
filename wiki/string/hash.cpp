@@ -2,43 +2,62 @@
 // COMPLEXITY: O(n) preprocessing, O(1) query
 // DESCRIPTION: Computes the hash of arbitrary substrings of a given string s.
 
-struct hashs
-{
-	string s;
-	int m1, m2, n, p;
-	vector<int> p1, p2, sum1, sum2;
+#include <bits/stdc++.h>
+ 
+#define int long long
+#define pb push_back
+#define all(x) (x).begin(), (x).end()
+#define endl '\n'
+#define loop(i, a, b) for (int i = (a); i < (b); i++)
+#define debug(var) cout << #var << ": " << var << endl
+#define pii pair<int, int>
+#define vi vector<int>
 
-	hashs(string s) : s(s), n(s.size()), p1(n + 1), p2(n + 1), sum1(n + 1), sum2(n + 1)
-	{
-		srand(time(0));
-		p = 31;
-		m1 = rand() / 10 + 1e9; // 1000253887;
-		m2 = rand() / 10 + 1e9; // 1000546873;
+using namespace std;
 
-		p1[0] = p2[0] = 1;
-		rep(i, 1, n + 1)
-		{
-			p1[i] = (p * p1[i - 1]) % m1;
-			p2[i] = (p * p2[i - 1]) % m2;
-		}
+int m1, m2;
 
-		sum1[0] = sum2[0] = 0;
-		rep(i, 1, n + 1)
-		{
-			sum1[i] = (sum1[i - 1] * p) % m1 + s[i - 1];
-			sum2[i] = (sum2[i - 1] * p) % m2 + s[i - 1];
-			sum1[i] %= m1;
-			sum2[i] %= m2;
-		}
-	}
+struct Hash {
+    const int P = 31;
+    int n; string s;
+    vector<int> h, hi, p, p2, h2, hi2;
+    Hash() {}
+    Hash(string s):
+	s(s), n(s.size()), h(n), hi(n), p(n), h2(n), hi2(n),p2(n) {
+        for (int i=0;i<n;i++) p[i] = (i ? P*p[i-1]:1) % m1;
+        for (int i=0;i<n;i++) p2[i] = (i ? P*p2[i-1]:1) % m2;
 
-	// hash do intervalo [l, r)
-	int gethash(int l, int r)
-	{
-		int c1 = m1 - (sum1[l] * p1[r - l]) % m1;
-		int c2 = m2 - (sum2[l] * p2[r - l]) % m2;
-		int h1 = (sum1[r] + c1) % m1;
-		int h2 = (sum2[r] + c2) % m2;
-		return (h1 << 30) ^ h2;
-	}
+        for (int i=0;i<n;i++)
+            h[i] = (s[i] + (i ? h[i-1]:0) * P) % m1;
+        for (int i=0;i<n;i++)
+            h2[i] = (s[i] + (i ? h2[i-1]:0) * P) % m2;
+
+        for (int i=n-1;i>=0;i--) 
+            hi[i] = (s[i] + (i+1<n ? hi[i+1]:0) * P) % m1;
+        for (int i=n-1;i>=0;i--) 
+            hi2[i] = (s[i] + (i+1<n ? hi2[i+1]:0) * P) % m2;
+    }
+    int gethash(int l, int r) {
+        int hash = (h[r] - (l ? h[l-1]*p[r-l+1]%m1 : 0));
+        int hash2 = (h2[r] - (l ? h2[l-1]*p2[r-l+1]%m2 : 0));
+        hash = hash < 0 ? hash + m1 : hash;
+        hash2 = hash2 < 0 ? hash2 + m2 : hash2;
+		return (hash << 30) ^ hash2;
+    }
+    int gethashinv(int l, int r) {
+        int hash = (hi[l] - (r+1 < n ? hi[r+1]*p[r-l+1] % m1 : 0));
+        int hash2 = (hi2[l] - (r+1 < n ? hi2[r+1]*p2[r-l+1] % m2 : 0));
+        hash= hash < 0 ? hash + m1 : hash;
+        hash2= hash2 < 0 ? hash + m2 : hash2;
+		return (hash << 30) ^ hash2;
+    }
 };
+
+
+void solve()
+{
+	srand(time(0));
+	m1 = rand()/10 + 1e9;
+	m2 = rand()/10 + 1e9;
+	Hash hasher(s);
+}
