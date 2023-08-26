@@ -1,3 +1,7 @@
+// TITLE: Point structure
+// COMPLEXITY: Does not apply
+// DESCRIPTION: Basic 2d point functionality
+
 // Point/vector structure definition and sorting
 
 #define T int
