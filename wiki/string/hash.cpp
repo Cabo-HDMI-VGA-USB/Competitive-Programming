@@ -1,22 +1,6 @@
 // TITLE: String hash
 // COMPLEXITY: O(n) preprocessing, O(1) query
 // DESCRIPTION: Computes the hash of arbitrary substrings of a given string s.
-
-#include <bits/stdc++.h>
- 
-#define int long long
-#define pb push_back
-#define all(x) (x).begin(), (x).end()
-#define endl '\n'
-#define loop(i, a, b) for (int i = (a); i < (b); i++)
-#define debug(var) cout << #var << ": " << var << endl
-#define pii pair<int, int>
-#define vi vector<int>
-
-using namespace std;
-
-int m1, m2;
-
 int m1, m2;
 int n; string s;
 
