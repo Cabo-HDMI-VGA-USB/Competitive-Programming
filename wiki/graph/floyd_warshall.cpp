@@ -1,5 +1,5 @@
 // TITLE: Floyd Warshall
-// COMPLEXITY: O(V^3)
+// COMPLEXITY: O(V*V*V)
 // DESCRIPTION: Finds shortest distances between all pairs of vertices
 
 for(int k=0;k<n;k++) {
