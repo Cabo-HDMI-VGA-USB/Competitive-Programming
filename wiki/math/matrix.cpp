@@ -1,3 +1,7 @@
+// TITLE: Matrix exponentiation
+// COMPLEXITY: O(n^3 log(b)) to raise an nxn matrix to the power of b.
+// DESCRIPTION: Computes powers of matrices efficiently.
+
 struct Matrix {
     vector<vi> m;
     int r, c;
