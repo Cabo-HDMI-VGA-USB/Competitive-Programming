@@ -10,10 +10,10 @@ bool eq(T a, T b){ return abs(a-b)<=EPS; }
 
 struct point{
 	T x, y;
-	point(t x=0, t y=0): x(x), y(y){}
+	point(T x=0, T y=0): x(x), y(y){}
 	
 	point operator+(const point &o) const{ return {x + o.x, y + o.y}; }
-	point operator-(const point &o) const{ return {x - o.x, y + o.y}; }
+	point operator-(const point &o) const{ return {x - o.x, y - o.y}; }
 	point operator*(T k) const{ return {x*k, y*k}; }
 	point operator/(T k) const{ return {x/k, y/k}; }
 	T operator*(const point &o) const{ return x*o.x + y*o.y; }
