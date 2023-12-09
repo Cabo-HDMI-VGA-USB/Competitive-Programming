@@ -19,11 +19,12 @@ struct point{
 	T operator*(const point &o) const{ return x*o.x + y*o.y; }
 	T operator^(const point &o) const{ return x*o.y - y*o.x; }
 	bool operator<(const point &o) const{ return (eq(x, o.x) ? y < o.y : x < o.x); }
-	bool operator==(const point &o) const{ return eq(x, o.x) and eq(y, o.t); }
+	bool operator==(const point &o) const{ return eq(x, o.x) and eq(y, o.y); }
 	
-	friend ostream& operator<<(ostream& os, point p){
+	friend auto& operator<<(ostream& os, point p){
 		return os << "(" << p.x << "," << p.y << ")";
 	}
+	friend auto &operator>>(istream& is, point &c) { cin >> c.x >> c.y; return is; }
 };
 
 int ret[2][2] = {{3, 2}, {4, 1}};
