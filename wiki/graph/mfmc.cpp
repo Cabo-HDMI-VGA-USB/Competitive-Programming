@@ -1,41 +1,52 @@
 struct Dinic {
   struct Edge {
-    int a, b, cap, flow=0;
-    Edge (int a, int b, int cap) : a(a), b(b), cap(cap) {}
+r   int a, b, cap, flow=0, cost;
+    Edge (int a, int b, int cap, int cost) 
+	: a(a), b(b), cap(cap), cost(cost) {}
   };
 
   vector<Edge> edges;
   vector<vector<int>> adj;
-  vector<int> level, nxt;
+  vector<int> nxt;
+  vector<int> dist;
+  int cost = 0;
 
   int n, s, t;
   Dinic(int n, int s, int t) : n(n), s(s), t(t) {
     adj.resize(n);
   }
 
-  void add_edge(int a, int b, int cap) {
-    edges.eb(a, b, cap);
+  void add_edge(int a, int b, int cap, int cost) {
+    edges.eb(a, b, cap, cost);
     adj[a].pb(edges.size()-1);
-    edges.eb(b, a, 0);
+    edges.eb(b, a, 0, -cost);
     adj[b].pb(edges.size()-1);
   }
 
-  bool bfs() {
+  bool spfa() {
     queue<int> q;
-    level.assign(n, -1);
-    level[s] = 0;
+	vector<bool> inqueue(n);
+    dist.assign(n, oo);
+    dist[s] = 0;
+	inqueue[s] = true;
     q.push(s);
     while (!q.empty()) {
       int a = q.front(); q.pop();
+	  inqueue[a] = false;
+
       for (auto eid : adj[a]) {
         auto e = edges[eid];
         if (e.cap - e.flow <= 0) continue;
-        if (level[e.b] != -1) continue;
-        level[e.b] = level[a] + 1;
-        q.push(e.b);
+		if (dist[a] + e.cost < dist[b]) {
+			dist[e.b] = dist[a] + e.cost;
+			if (!inqueue[e.b]) {
+				q.push(e.b);
+				inqueue[e.b] = true;
+			}
+		}
       }
     }
-    return level[t] != -1;
+    return dist[t] != oo;
   }
 
   int dfs(int a, int f) {
@@ -44,11 +55,12 @@ struct Dinic {
       int eid = adj[a][cid];
       auto &e = edges[eid];
       if (e.cap - e.flow <= 0) continue;
-      if (level[e.b] != level[e.a] + 1) continue;
+      if (dist[e.b] != dist[a] + e.cost) continue;
       int newf = dfs(e.b, min(f, e.cap-e.flow));
       if (newf == 0) continue;
       e.flow += newf;
       edges[eid^1].flow -= newf;
+	  cost += e.cost * newf;
       return newf;
     }
     return 0;
@@ -56,7 +68,7 @@ struct Dinic {
 
   int flow() {
     int f = 0;
-    while (bfs()) {
+    while (spfa()) {
       nxt.assign(n, 0);
       while (int newf = dfs(s, oo))
         f += newf;
