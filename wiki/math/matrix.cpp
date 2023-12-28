@@ -40,7 +40,7 @@ struct Matrix {
 
 Matrix fpow(Matrix b, int e, int n) {
     if(e == 0) return Matrix(n, n, true); // identidade
-    Matrix res = fexp(b, e/2, n);
+    Matrix res = fpow(b, e/2, n);
     res = (res * res);
     if(e%2) res = (res * b);
 
