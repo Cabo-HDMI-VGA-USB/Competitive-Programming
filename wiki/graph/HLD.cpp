@@ -38,30 +38,23 @@ struct HLD {
 	}
 
 	bool isa(int a, int b) {
-		return ti[a] <= ti[b] and to[a]>=to[b];
+		return ti[a]<=ti[b] and to[a]>=to[b];
 	}
 
 	// if seg.merge is commutative then queryI can be replaced by query.	
 	S query(int a, int b) {
 		// SegTree identity		
-		auto a1=Info::id(), a2=Info::id();
+		S a1=Info::id(),a2=Info::id();
 
-		while(!isa(hd[a], b)) {
+		for (;!isa(hd[a], b); a=p[hd[a]])
 			a1=seg.merge(a1, seg.queryI(ti[hd[a]], ti[a]+1));
-			a=p[hd[a]];
-		}
 
-		while(!isa(hd[b], a)) {
+		for(;!isa(hd[b],a);b=p[hd[b]])
 			a2=seg.merge(seg.query(ti[hd[b]], ti[b]+1), a2);
-			b=p[hd[b]];
-		}
-		if (isa(a,b)) {
-			a2=seg.merge(seg.query(ti[a], ti[b]+1), a2);
-			return seg.merge(a1, a2);
-		} else {
-			a1=seg.merge(a1, seg.queryI(ti[b], ti[a]+1));
-			return seg.merge(a1, a2);
-		}
+
+		if (isa(a,b)) a2=seg.merge(seg.query(ti[a], ti[b]+1), a2);
+		else a1=seg.merge(a1, seg.queryI(ti[b], ti[a]+1));
+		return seg.merge(a1, a2);
 	}
 
 	void update(int a, char c) {
